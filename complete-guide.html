@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="complete HTML5 Guide">
+    <meta name="author" content="Emillio">
+    <title>HTML Guide</title>
+    <link rel="icon" href="image.jpg">
+    <style>
+        /* ===== Global Styles ===== */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #059669;
+            --dark: #1e293b;
+            --darker: #0f172a;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --danger: #dc2626;
+            --warning: #d97706;
+            --code-bg: #1e1e1e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            scroll-behavior: smooth;
+        }
+        
+        /* ===== Typography ===== */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--darker);
+        }
+        
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; border-bottom: 2px solid var(--gray); padding-bottom: 0.5rem; }
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.25rem; }
+        
+        p { margin-bottom: 1rem; }
+        
+        /* ===== Layout ===== */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* ===== Navigation ===== */
+        header {
+            background-color: var(--darker);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* ===== Hero Section ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary);
+            padding: 0.8rem 1.75rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* ===== Main Content ===== */
+        main {
+            padding: 3rem 0;
+        }
+        
+        .section {
+            margin-bottom: 4rem;
+        }
+        
+        /* ===== Topic Cards ===== */
+        .topic-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .topic-card h3 {
+            color: var(--primary);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .topic-card h3::before {
+            content: '▣';
+            color: var(--primary);
+            font-size: 1.25rem;
+        }
+        
+        /* ===== Code Blocks ===== */
+        pre {
+            background-color: var(--code-bg);
+            color: #f8f8f2;
+            padding: 1.25rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            position: relative;
+        }
+        
+        pre::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--primary);
+            border-radius: 6px 0 0 6px;
+        }
+        
+        code {
+            font-family: 'Fira Code', monospace;
+            background-color: rgba(0,0,0,0.05);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--danger);
+        }
+        
+        /* ===== Tables ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+        
+        /* ===== Alerts ===== */
+        .note {
+            background-color: #e0f2fe;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+        
+        .warning {
+            background-color: #ffedd5;
+            border-left: 4px solid var(--warning);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+        
+        .danger {
+            background-color: #fee2e2;
+            border-left: 4px solid var(--danger);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+        
+        /* ===== Footer ===== */
+        footer {
+            background-color: var(--darker);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+        }
+        
+        /* ===== Responsive Design ===== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* ===== Print Styles ===== */
+        @media print {
+            nav, footer {
+                display: none;
+            }
+            
+            .topic-card {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== Header ===== -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">HTML5 Course</a>
+                <ul class="nav-links">
+                    <li><a href="#basics">Basics</a></li>
+                    <li><a href="#elements">Elements</a></li>
+                    <li><a href="#forms">Forms</a></li>
+                    <li><a href="#semantic">Semantic</a></li>
+                    <li><a href="#advanced">Advanced</a></li>
+                    <li><a href="#accessibility">Accessibility</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- ===== Hero Section ===== -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Complete HTML5 Mastery Guide</h1>
+                <p>Everything you need to know about HTML5 - from basic tags to advanced semantic elements, accessibility, and modern best practices.</p>
+                <a href="#basics" class="btn">Start Course</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ===== Main Content ===== -->
+    <main class="container">
+        <!-- ===== HTML Basics ===== -->
+        <section id="basics" class="section">
+            <h2>HTML Basics</h2>
+            <p>HTML (HyperText Markup Language) is the most basic building block of the Web. It defines the meaning and structure of web content. Other technologies besides HTML are generally used to describe a web page's appearance/presentation (CSS) or functionality/behavior (JavaScript).<br>"Hypertext" refers to links that connect web pages to one another, either within a single website or between websites. Links are a fundamental aspect of the Web. By uploading content to the Internet and linking it to pages created by other people, you become an active participant in the World Wide Web.<br>HTML uses "markup" to annotate text, images, and other content for display in a Web browser.</p>
+            
+            <div class="topic-card">
+                <h3>Document Structure</h3>
+                <p>Every HTML document follows a standard structure:</p>
+                
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;meta name="description" content="This would provide a description"&gt;
+    &lt;meta name="keywords" content="HTML,CSS,JavaScript"&gt;
+    &lt;meta name="author" content="Your Name"&gt;
+    &lt;title&gt;Document Title&lt;/title&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+    &lt;link rel="icon" href="favicon.ico"&gt;
+    &lt;style&gt;
+    &lt;!-- Internal CSS go here --&gt;
+    &lt;style&gt;
+    &lt;script&gt;
+    &lt;!-- JavaScript can go here --&gt;
+    &lt;script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Visible content goes here --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                
+                <div class="note">
+                    <p><strong>Key Points:</strong></p>
+                    <ul>
+                        <li><code>&lt;!DOCTYPE html&gt;</code> must be the first line</li>
+                        <li>The <code>&lt;html&gt;</code> element is the root container</li>
+                        <li><code>lang</code> attribute specifies the document language</li>
+                        <li><code>viewport</code> meta tag ensures proper mobile rendering</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="topic-card">
+                <h3>HTML Elements and Tags</h3>
+                <p>HTML documents are made up of elements represented by tags:</p>
+                
+                <table>
+                    <tr>
+                        <th>Element</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td>Heading</td>
+                        <td>Section headings (h1-h6)</td>
+                        <td><code>&lt;h1&gt;Main Title&lt;/h1&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Paragraph</td>
+                        <td>Text paragraph</td>
+                        <td><code>&lt;p&gt;Some text.&lt;/p&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Link</td>
+                        <td>Hyperlink to other pages</td>
+                        <td><code>&lt;a href="page.html"&gt;Link&lt;/a&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Image</td>
+                        <td>Embed an image</td>
+                        <td><code>&lt;img src="img.jpg" alt="Description"&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Division</td>
+                        <td>Container for other elements</td>
+                        <td><code>&lt;div&gt;Content&lt;/div&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Span</td>
+                        <td>Inline container</td>
+                        <td><code>&lt;span&gt;Text&lt;/span&gt;</code></td>
+                    </tr>
+                </table>
+                
+                <div class="warning">
+                    <p><strong>Important:</strong> Always include the <code>alt</code> attribute for images for accessibility.</p>
+                </div>
+            </div>
+            
+            <div class="topic-card">
+                <h3>HTML Attributes</h3>
+                <p>Attributes provide additional information about elements:</p>
+                
+                <pre><code>&lt;a href="https://example.com" target="_blank" title="Visit Example"&gt;Link&lt;/a&gt;</code></pre>
+                
+                <table>
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Description</th>
+                        <th>Used With</th>
+                    </tr>
+                    <tr>
+                        <td>href</td>
+                        <td>Specifies the URL</td>
+                        <td>&lt;a&gt;, &lt;link&gt;</td>
+                    </tr>
+                    <tr>
+                        <td>src</td>
+                        <td>Specifies the source</td>
+                        <td>&lt;img&gt;, &lt;script&gt;</td>
+                    </tr>
+                    <tr>
+                        <td>alt</td>
+                        <td>Alternative text</td>
+                        <td>&lt;img&gt;</td>
+                    </tr>
+                    <tr>
+                        <td>class</td>
+                        <td>CSS class selector</td>
+                        <td>All elements</td>
+                    </tr>
+                    <tr>
+                        <td>id</td>
+                        <td>Unique identifier</td>
+                        <td>All elements</td>
+                    </tr>
+                    <tr>
+                        <td>style</td>
+                        <td>Inline CSS</td>
+                        <td>All elements</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        
+        <!-- ===== HTML Elements ===== -->
+        <section id="elements" class="section">
+            <h2>HTML Elements</h2>
+            
+            <div class="topic-card">
+                <h3>Text Formatting</h3>
+                <p>HTML provides various text formatting elements:</p>
+                
+                <div style="background: #f5f5f5; padding: 1rem; border-radius: 5px;">
+                    <p><b>Bold text</b> - <code>&lt;b&gt;</code> or <code>&lt;strong&gt;</code></p>
+                    <p><i>Italic text</i> - <code>&lt;i&gt;</code> or <code>&lt;em&gt;</code></p>
+                    <p><u>Underlined text</u> - <code>&lt;u&gt;</code></p>
+                    <p><s>Strikethrough</s> - <code>&lt;s&gt;</code></p>
+                    <p><mark>Highlighted text</mark> - <code>&lt;mark&gt;</code></p>
+                    <p><small>Small text</small> - <code>&lt;small&gt;</code></p>
+                    <p>H<sub>2</sub>O - <code>&lt;sub&gt;</code></p>
+                    <p>x<sup>2</sup> - <code>&lt;sup&gt;</code></p>
+                </div>
+                
+                <div class="note">
+                    <p><strong>Semantic vs Non-semantic:</strong></p>
+                    <ul>
+                        <li><code>&lt;strong&gt;</code> indicates importance (screen readers emphasize)</li>
+                        <li><code>&lt;b&gt;</code> is just visual boldness</li>
+                        <li><code>&lt;em&gt;</code> indicates emphasis (screen readers change tone)</li>
+                        <li><code>&lt;i&gt;</code> is just visual italics</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Lists in HTML</h3>
+                <p>Three types of lists:</p>
+                
+                <h4>Unordered List (Bullet points)</h4>
+                <pre><code>&lt;ul&gt;
+    &lt;li&gt;Item 1&lt;/li&gt;
+    &lt;li&gt;Item 2&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+                
+                <h4>Ordered List (Numbered)</h4>
+                <pre><code>&lt;ol&gt;
+    &lt;li&gt;First item&lt;/li&gt;
+    &lt;li&gt;Second item&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+                
+                <h4>Description List (Terms and definitions)</h4>
+                <pre><code>&lt;dl&gt;
+    &lt;dt&gt;HTML&lt;/dt&gt;
+    &lt;dd&gt;HyperText Markup Language&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+                
+                <table>
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td>type</td>
+                        <td>List marker type</td>
+                        <td><code>&lt;ol type="A"&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>start</td>
+                        <td>Starting number</td>
+                        <td><code>&lt;ol start="5"&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>reversed</td>
+                        <td>Reverse numbering</td>
+                        <td><code>&lt;ol reversed&gt;</code></td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Tables</h3>
+                <p>For displaying tabular data:</p>
+                
+                <pre><code>&lt;table&gt;
+    &lt;caption&gt;Monthly Sales&lt;/caption&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Month&lt;/th&gt;
+            &lt;th&gt;Sales&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;January&lt;/td&gt;
+            &lt;td&gt;$10,000&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tfoot&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Total&lt;/th&gt;
+            &lt;th&gt;$10,000&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/tfoot&gt;
+&lt;/table&gt;</code></pre>
+                
+                <div class="note">
+                    <p><strong>Table Accessibility:</strong></p>
+                    <ul>
+                        <li>Always use <code>&lt;th&gt;</code> for header cells</li>
+                        <li>Use <code>scope="col"</code> or <code>scope="row"</code> on headers</li>
+                        <li>Include a <code>&lt;caption&gt;</code> for context</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ===== HTML Forms ===== -->
+        <section id="forms" class="section">
+            <h2>HTML Forms</h2>
+            
+            <div class="topic-card">
+                <h3>Form Structure</h3>
+                <p>The complete form structure with all input types:</p>
+                
+                <pre><code>&lt;form action="/submit" method="POST" enctype="multipart/form-data"&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;Personal Information&lt;/legend&gt;
+        
+        &lt;div&gt;
+            &lt;label for="name"&gt;Full Name:&lt;/label&gt;
+            &lt;input type="text" id="name" name="name" required&gt;
+        &lt;/div&gt;
+        
+        &lt;div&gt;
+            &lt;label for="email"&gt;Email:&lt;/label&gt;
+            &lt;input type="email" id="email" name="email" required&gt;
+        &lt;/div&gt;
+    &lt;/fieldset&gt;
+    
+    &lt;fieldset&gt;
+        &lt;legend&gt;Preferences&lt;/legend&gt;
+        
+        &lt;div&gt;
+            &lt;label&gt;Favorite Color:&lt;/label&gt;
+            &lt;input type="color" name="color"&gt;
+        &lt;/div&gt;
+        
+        &lt;div&gt;
+            &lt;label&gt;Age:&lt;/label&gt;
+            &lt;input type="range" name="age" min="18" max="100"&gt;
+        &lt;/div&gt;
+    &lt;/fieldset&gt;
+    
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Input Types</h3>
+                <p>HTML5 introduced several new input types:</p>
+                
+                <table>
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td>text</td>
+                        <td>Single-line text input</td>
+                        <td><code>&lt;input type="text"&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>email</td>
+                        <td>Email address with validation</td>
+                        <td><code>&lt;input type="email"&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>password</td>
+                        <td>Masked text input</td>
+                        <td><code>&lt;input type="password"&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>number</td>
+                        <td>Numeric input</td>
+                        <td><code>&lt;input type="number" min="1" max="10"&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>date</td>
+                        <td>Date picker</td>
+                        <td><code>&lt;input type="date"&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>file</td>
+                        <td>File upload</td>
+                        <td><code>&lt;input type="file" accept=".pdf,.jpg"&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>checkbox</td>
+                        <td>Multiple selections</td>
+                        <td><code>&lt;input type="checkbox"&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>radio</td>
+                        <td>Single selection</td>
+                        <td><code>&lt;input type="radio" name="group"&gt;</code></td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        
+        <!-- ===== Semantic HTML ===== -->
+        <section id="semantic" class="section">
+            <h2>Semantic HTML5</h2>
+            
+            <div class="topic-card">
+                <h3>Semantic Elements</h3>
+                <p>HTML5 introduced semantic elements that clearly describe their meaning:</p>
+                
+                <pre><code>&lt;header&gt;
+    &lt;h1&gt;Website Title&lt;/h1&gt;
+    &lt;nav&gt;...&lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+    &lt;article&gt;
+        &lt;h2&gt;Article Title&lt;/h2&gt;
+        &lt;p&gt;Article content...&lt;/p&gt;
+    &lt;/article&gt;
+    
+    &lt;aside&gt;
+        &lt;h3&gt;Related Links&lt;/h3&gt;
+    &lt;/aside&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;
+    &lt;p&gt;Copyright information&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+                
+                <table>
+                    <tr>
+                        <th>Element</th>
+                        <th>Purpose</th>
+                    </tr>
+                    <tr>
+                        <td>&lt;header&gt;</td>
+                        <td>Introductory content</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;nav&gt;</td>
+                        <td>Navigation links</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;main&gt;</td>
+                        <td>Primary content</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;article&gt;</td>
+                        <td>Self-contained composition</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;section&gt;</td>
+                        <td>Thematic grouping</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;aside&gt;</td>
+                        <td>Indirectly related content</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;footer&gt;</td>
+                        <td>Closing content</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        
+        <!-- ===== Advanced HTML ===== -->
+        <section id="advanced" class="section">
+            <h2>Advanced HTML</h2>
+            
+            <div class="topic-card">
+                <h3>Multimedia</h3>
+                <p>HTML5 provides native multimedia support:</p>
+                
+                <h4>Audio</h4>
+                <pre><code>&lt;audio controls&gt;
+    &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+    &lt;source src="audio.ogg" type="audio/ogg"&gt;
+    Your browser does not support the audio element.
+&lt;/audio&gt;</code></pre>
+                
+                <h4>Video</h4>
+                <pre><code>&lt;video width="640" height="360" controls poster="preview.jpg"&gt;
+    &lt;source src="video.mp4" type="video/mp4"&gt;
+    &lt;source src="video.webm" type="video/webm"&gt;
+    Your browser does not support the video tag.
+&lt;/video&gt;</code></pre>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Embedding Content</h3>
+                <p>Various ways to embed external content:</p>
+                
+                <pre><code>&lt;!-- YouTube iframe --&gt;
+&lt;iframe width="560" height="315" 
+        src="https://www.youtube.com/embed/..." 
+        frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;!-- PDF viewer --&gt;
+&lt;embed type="application/pdf" src="document.pdf" width="600" height="400"&gt;
+
+&lt;!-- SVG --&gt;
+&lt;svg width="100" height="100"&gt;
+    &lt;circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" /&gt;
+&lt;/svg&gt;</code></pre>
+            </div>
+        </section>
+        
+        <!-- ===== Accessibility ===== -->
+        <section id="accessibility" class="section">
+            <h2>HTML Accessibility</h2>
+            
+            <div class="topic-card">
+                <h3>ARIA Landmarks</h3>
+                <p>ARIA (Accessible Rich Internet Applications) helps make web content more accessible:</p>
+                
+                <pre><code>&lt;div role="banner"&gt; &lt;!-- Header content --&gt; &lt;/div&gt;
+&lt;div role="navigation" aria-label="Main menu"&gt; &lt;!-- Nav menu --&gt; &lt;/div&gt;
+&lt;div role="main" aria-labelledby="main-heading"&gt; &lt;!-- Main content --&gt; &lt;/div&gt;
+&lt;div role="complementary" aria-label="Sidebar"&gt; &lt;!-- Sidebar --&gt; &lt;/div&gt;
+&lt;div role="contentinfo"&gt; &lt;!-- Footer content --&gt; &lt;/div&gt;</code></pre>
+                
+                <div class="note">
+                    <p><strong>Note:</strong> Many ARIA roles are now redundant with HTML5 semantic elements, but are still useful for older browsers.</p>
+                </div>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Accessible Forms</h3>
+                <p>Key practices for accessible forms:</p>
+                
+                <pre><code>&lt;form&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;Contact Information&lt;/legend&gt;
+        
+        &lt;div&gt;
+            &lt;label for="name"&gt;Full Name:&lt;/label&gt;
+            &lt;input type="text" id="name" name="name" 
+                   aria-describedby="name-help" required&gt;
+            &lt;span id="name-help"&gt;Please enter your full name&lt;/span&gt;
+        &lt;/div&gt;
+        
+        &lt;div role="group" aria-labelledby="pref-heading"&gt;
+            &lt;h3 id="pref-heading"&gt;Notification Preference&lt;/h3&gt;
+            &lt;label&gt;
+                &lt;input type="radio" name="notification" value="email" checked&gt;
+                Email
+            &lt;/label&gt;
+            &lt;label&gt;
+                &lt;input type="radio" name="notification" value="sms"&gt;
+                SMS
+            &lt;/label&gt;
+        &lt;/div&gt;
+    &lt;/fieldset&gt;
+&lt;/form&gt;</code></pre>
+            </div>
+        </section>
+    </main>
+    
+    <!-- ===== Footer ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>HTML5 Mastery</h3>
+                    <p>The complete guide to modern HTML5 development.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#basics">HTML Basics</a></li>
+                        <li><a href="#elements">HTML Elements</a></li>
+                        <li><a href="#forms">HTML Forms</a></li>
+                        <li><a href="#semantic">Semantic HTML</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">MDN HTML Docs</a></li>
+                        <li><a href="https://html.spec.whatwg.org/" target="_blank">HTML Living Standard</a></li>
+                        <li><a href="https://validator.w3.org/" target="_blank">HTML Validator</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 HTML5 Mastery Guide. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
