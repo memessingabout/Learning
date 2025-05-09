@@ -286,4 +286,4 @@ GitHub Issues: For bugs and feature requests, please use the Issues page.
   * **Call to Action for Contributions:** More inviting language.
   * **Comprehensive Contact Section:** Includes project link and maintainer details.
 
-Remember to replace all bracketed placeholders (`[...]`) with the actual information for the project. You would also create a `LICENSE` file in your repository containing the MIT License text.
+Remember to replace all bracketed placeholders (`[...]`) with the actual information for the project. You would also create a `LICENSE` file in your repository containing the MIT Licen
